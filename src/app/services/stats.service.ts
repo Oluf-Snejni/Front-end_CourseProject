@@ -1,3 +1,5 @@
+import { Injectable } from "@angular/core";
+
 @Injectable({ providedIn: 'root' })
 export class StatsService {
 calculateWPM(chars: number, seconds: number): number {
