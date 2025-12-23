@@ -1,0 +1,18 @@
+<mat-card>
+<h2>Клавиатурный тренажер</h2>
+
+
+<p class="text">{{ text }}</p>
+
+
+<mat-form-field appearance="outline" class="full">
+<mat-label>Ввод</mat-label>
+<input matInput [formControl]="form.controls.input">
+</mat-form-field>
+
+
+<div class="stats">
+<span>WPM: {{ wpm }}</span>
+<span>Ошибки: {{ errors }}</span>
+</div>
+</mat-card>
