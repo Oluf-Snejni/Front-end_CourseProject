@@ -1,31 +1,39 @@
-mat-card {
-max-width: 600px;
-margin: 40px auto;
-padding: 24px;
+.trainer-card {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
 }
 
-
-
 .text-line {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 26px;
+  font-family: monospace;
+  margin-bottom: 16px;
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-line span {
+  opacity: 0.5;
+}
+
+.text-line span.active {
+  opacity: 1;
+  border-bottom: 2px solid #3f51b5;
+}
+
+.text-line span.space {
+  color: #999;
 }
 
 .input {
   width: 100%;
-  margin-top: 16px;
+  margin-bottom: 16px;
 }
-
 
 .stats {
-display: flex;
-justify-content: space-between;
-margin-top: 16px;
-}
-
-
-.full {
-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-weight: 500;
 }

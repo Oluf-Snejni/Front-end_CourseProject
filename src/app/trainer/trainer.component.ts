@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -23,8 +23,10 @@ import { StatsService } from '../services/stats.service';
 })
 export class TrainerComponent implements OnInit {
 
-  words: string[] = [];
-  currentWordIndex = 0;
+  text = '';
+  finished = false;
+  chars: string[] = [];
+  currentIndex = 0;
 
   startTime!: number;
   wpm = 0;
@@ -40,28 +42,51 @@ export class TrainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const text = this.textService.getRandomText();
-    this.words = text.split(' ');
+    this.text = this.textService.getRandomText();
+    this.chars = this.text.split('');
     this.startTime = Date.now();
 
     this.form.controls.input.valueChanges.subscribe(value => {
-      const currentWord = this.words[this.currentWordIndex];
+      if (!value) return;
 
-      // ✔ пользователь ввёл слово и нажал пробел
-      if (value.endsWith(' ') && value.trim() === currentWord) {
-        this.currentWordIndex++;
-        this.form.controls.input.setValue('', { emitEvent: false });
+      const typedChar = value[value.length - 1];
+      const expectedChar = this.chars[this.currentIndex];
+
+      //  ошибка
+      if (typedChar !== expectedChar) {
+        this.errors++;
+        this.form.controls.input.setValue(value.slice(0, -1), { emitEvent: false });
+        return;
       }
 
+      this.currentIndex++;
+
       const seconds = (Date.now() - this.startTime) / 1000;
-      this.wpm = this.stats.calculateWPM(this.currentWordIndex * 5, seconds);
-      this.errors = this.stats.countErrors(currentWord, value.trim());
+      this.wpm = this.stats.calculateWPM(this.currentIndex, seconds);
+
+      this.form.controls.input.setValue('', { emitEvent: false });
     });
+    if (this.currentIndex >= this.chars.length) {
+        this.finished = true;
+    }
+  }
+  
+
+  get progress(): number {
+    return (this.currentIndex / this.chars.length) * 100;
   }
 
-  get visibleText(): string {
-    return this.words
-      .slice(0, this.currentWordIndex + 1)
-      .join(' ');
+  get visibleChars(): string[] {
+    return this.chars.slice(this.currentIndex, this.currentIndex + 40);
   }
+
+  restart(): void {
+  this.text = this.textService.getRandomText();
+  this.chars = this.text.split('');
+  this.currentIndex = 0;
+  this.errors = 0;
+  this.wpm = 0;
+  this.finished = false;
+  this.startTime = Date.now();
+}
 }

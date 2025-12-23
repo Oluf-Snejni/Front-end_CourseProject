@@ -1,19 +1,45 @@
-<mat-card>
-  <div class="text-line">
-    {{ visibleText }}
-  </div>
+<mat-card class="trainer-card">
 
-  <mat-form-field appearance="outline" class="input">
-    <input
-      matInput
-      [formControl]="form.controls.input"
-      placeholder="Печатай слово и жми пробел"
-      autocomplete="off"
-    />
-  </mat-form-field>
+  <ng-container *ngIf="!finished; else result">
 
-  <mat-progress-bar
-    mode="determinate"
-    [value]="(currentWordIndex / words.length) * 100">
-  </mat-progress-bar>
+    <div class="text-line">
+      <span
+        *ngFor="let char of visibleChars; let i = index"
+        [class.active]="i === 0"
+        [class.space]="char === ' '">
+        {{ char === ' ' ? '␣' : char }}
+      </span>
+    </div>
+
+    <mat-form-field appearance="outline" class="input">
+      <input
+        matInput
+        [formControl]="form.controls.input"
+        autocomplete="off"
+        autofocus
+      />
+    </mat-form-field>
+
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progress">
+    </mat-progress-bar>
+
+    <div class="stats">
+      <span>WPM: {{ wpm }}</span>
+      <span>Errors: {{ errors }}</span>
+    </div>
+
+  </ng-container>
+
+  <ng-template #result>
+    <h2>Результат</h2>
+    <p>Скорость: <b>{{ wpm }} WPM</b></p>
+    <p>Ошибки: <b>{{ errors }}</b></p>
+
+    <button mat-raised-button color="primary" (click)="restart()">
+      Заново
+    </button>
+  </ng-template>
+
 </mat-card>
