@@ -38,6 +38,8 @@ export class TrainerComponent implements OnInit {
     input: new FormControl('', { nonNullable: true })
   });
 
+  currentLanguage: 'en' | 'ru' = 'en';  // текущий язык
+
   constructor(
     private textService: TextService,
     private stats: StatsService
@@ -45,15 +47,19 @@ export class TrainerComponent implements OnInit {
 
   isDarkTheme = false;
 
-toggleTheme(): void {
-  this.isDarkTheme = !this.isDarkTheme;
-
-  if (this.isDarkTheme) {
-    document.body.classList.add('dark-theme');
-  } else {
-    document.body.classList.remove('dark-theme');
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
   }
-}
+
+  toggleLanguage(): void {
+    this.currentLanguage = this.currentLanguage === 'en' ? 'ru' : 'en';
+    this.startNewText();
+  }
 
   ngOnInit(): void {
     this.startNewText();
@@ -80,31 +86,27 @@ toggleTheme(): void {
       // очищаем инпут
       this.form.controls.input.setValue('', { emitEvent: false });
 
-      // Проверка окончания тренировки — теперь внутри подписки
+      // Проверка окончания тренировки
       if (this.currentIndex >= this.chars.length) {
         this.finished = true;
       }
     });
   }
 
-  // Метод для получения прогресса
   get progress(): number {
     return (this.currentIndex / this.chars.length) * 100;
   }
 
-  // Метод для отображаемых символов
   get visibleChars(): string[] {
     return this.chars.slice(this.currentIndex, this.currentIndex + 40);
   }
 
-  // Метод для запуска новой тренировки
   restart(): void {
     this.startNewText();
   }
 
-  // Вспомогательный метод для инициализации текста
   private startNewText(): void {
-    this.text = this.textService.getRandomText();
+    this.text = this.textService.getRandomText(this.currentLanguage);
     this.chars = this.text.split('');
     this.currentIndex = 0;
     this.errors = 0;

@@ -5,6 +5,11 @@
       {{ isDarkTheme ? 'Светлая тема' : 'Темная тема' }}
     </button>
     <app-audio-player></app-audio-player>
+    <div class="controls">
+      <button mat-raised-button color="primary" (click)="toggleLanguage()">
+        {{ currentLanguage === 'en' ? 'Русский' : 'English' }}
+      </button>
+    </div>
     <div class="text-line">
       <span
         *ngFor="let char of visibleChars; let i = index"
