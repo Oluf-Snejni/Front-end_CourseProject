@@ -39,7 +39,11 @@ export class TrainerComponent implements OnInit {
   });
 
   currentLanguage: 'en' | 'ru' = 'en';  // текущий язык
-
+  switchLanguage() {
+    this.currentLanguage = this.currentLanguage === 'en' ? 'ru' : 'en';
+    // обновляем текст по выбранному языку
+    this.startNewText();
+  }
   constructor(
     private textService: TextService,
     private stats: StatsService
@@ -105,7 +109,7 @@ export class TrainerComponent implements OnInit {
     this.startNewText();
   }
 
-  private startNewText(): void {
+  startNewText(): void {
     this.text = this.textService.getRandomText(this.currentLanguage);
     this.chars = this.text.split('');
     this.currentIndex = 0;

@@ -2,14 +2,22 @@
   
   <ng-container *ngIf="!finished; else result">
     <button class="theme-button" (click)="toggleTheme()">
-      {{ isDarkTheme ? 'Светлая тема' : 'Темная тема' }}
+      {{ isDarkTheme ? 'Светлая тема ☀️' : 'Темная тема 🌛' }}
     </button>
-    <app-audio-player></app-audio-player>
     <div class="controls">
       <button mat-raised-button color="primary" (click)="toggleLanguage()">
-        {{ currentLanguage === 'en' ? 'Русский' : 'English' }}
+        {{ currentLanguage === 'en' ? 'Русский 🏠' : 'English 🗽' }}
+      </button>
+
+
+      <button class="refresh-button" (click)="startNewText()">
+        Новый текст 🔄️
       </button>
     </div>
+      <app-audio-player></app-audio-player>
+
+
+    
     <div class="text-line">
       <span
         *ngFor="let char of visibleChars; let i = index"
