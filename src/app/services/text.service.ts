@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 @Injectable({ providedIn: 'root' })
 export class TextService {
 private texts: string[] = [
-'angular is awesome',
+'angular is awesome ngular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesomengular is awesome',
 'rxjs makes async easy',
 'dependency injection is powerful'
 ];
