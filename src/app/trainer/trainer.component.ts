@@ -42,17 +42,16 @@ export class TrainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.text = this.textService.getRandomText();
-    this.chars = this.text.split('');
-    this.startTime = Date.now();
+    this.startNewText();
 
+    // Подписка на ввод
     this.form.controls.input.valueChanges.subscribe(value => {
       if (!value) return;
 
       const typedChar = value[value.length - 1];
       const expectedChar = this.chars[this.currentIndex];
 
-      //  ошибка
+      // ошибка
       if (typedChar !== expectedChar) {
         this.errors++;
         this.form.controls.input.setValue(value.slice(0, -1), { emitEvent: false });
@@ -64,29 +63,40 @@ export class TrainerComponent implements OnInit {
       const seconds = (Date.now() - this.startTime) / 1000;
       this.wpm = this.stats.calculateWPM(this.currentIndex, seconds);
 
+      // очищаем инпут
       this.form.controls.input.setValue('', { emitEvent: false });
-    });
-    if (this.currentIndex >= this.chars.length) {
-        this.finished = true;
-    }
-  }
-  
 
+      // Проверка окончания тренировки — теперь внутри подписки
+      if (this.currentIndex >= this.chars.length) {
+        this.finished = true;
+      }
+    });
+  }
+
+  // Метод для получения прогресса
   get progress(): number {
     return (this.currentIndex / this.chars.length) * 100;
   }
 
+  // Метод для отображаемых символов
   get visibleChars(): string[] {
     return this.chars.slice(this.currentIndex, this.currentIndex + 40);
   }
 
+  // Метод для запуска новой тренировки
   restart(): void {
-  this.text = this.textService.getRandomText();
-  this.chars = this.text.split('');
-  this.currentIndex = 0;
-  this.errors = 0;
-  this.wpm = 0;
-  this.finished = false;
-  this.startTime = Date.now();
-}
+    this.startNewText();
+  }
+
+  // Вспомогательный метод для инициализации текста
+  private startNewText(): void {
+    this.text = this.textService.getRandomText();
+    this.chars = this.text.split('');
+    this.currentIndex = 0;
+    this.errors = 0;
+    this.wpm = 0;
+    this.finished = false;
+    this.startTime = Date.now();
+    this.form.controls.input.setValue('', { emitEvent: false });
+  }
 }
