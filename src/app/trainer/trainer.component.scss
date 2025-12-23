@@ -5,9 +5,17 @@ padding: 24px;
 }
 
 
-.text {
-font-size: 20px;
-margin-bottom: 16px;
+
+.text-line {
+  font-size: 24px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.input {
+  width: 100%;
+  margin-top: 16px;
 }
 
 
