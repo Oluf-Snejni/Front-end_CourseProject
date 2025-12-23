@@ -1,0 +1,8 @@
+<button class="audio-button" (click)="toggleMusic()">
+  {{ isPlaying ? 'Выключить музыку' : 'Включить музыку' }}
+</button>
+
+<audio #audioPlayer loop>
+  <source src="kithen.mp3" type="audio/mpeg">
+  Ваш браузер не поддерживает аудио.
+</audio>

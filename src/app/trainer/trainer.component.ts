@@ -7,6 +7,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { TextService } from '../services/text.service';
 import { StatsService } from '../services/stats.service';
+import { AudioPlayerComponent } from '../AudioPlayer/audio-player.component';
 
 @Component({
   selector: 'app-trainer',
@@ -16,7 +17,8 @@ import { StatsService } from '../services/stats.service';
     ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    AudioPlayerComponent  
   ],
   templateUrl: './trainer.component.html',
   styleUrls: ['./trainer.component.scss']

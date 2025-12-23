@@ -1,0 +1,15 @@
+.audio-button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+.audio-button:hover {
+  opacity: 0.8;
+}
