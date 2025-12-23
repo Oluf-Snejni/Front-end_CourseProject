@@ -7,6 +7,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   standalone: true
 })
 export class AudioPlayerComponent {
+currentLanguage: any;
+toggleLanguage() {
+throw new Error('Method not implemented.');
+}
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   isPlaying = false;

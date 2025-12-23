@@ -1,0 +1,39 @@
+
+.layout {
+  display: flex;
+  min-height: 10vh;
+}
+
+.side {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 520px;     
+  display: flex;
+  align-items: center;  
+  justify-content: center; 
+}
+
+.left {
+  left: 0;
+  background-image: url('/left.png');
+  background-size: auto 30%;  
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.right {
+  right: 0;
+  background-image: url('/right.png');
+  background-size: auto 30%;  
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.content {
+  margin: 0 200px; 
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
