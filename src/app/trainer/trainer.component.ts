@@ -41,6 +41,18 @@ export class TrainerComponent implements OnInit {
     private stats: StatsService
   ) {}
 
+  isDarkTheme = false;
+
+toggleTheme(): void {
+  this.isDarkTheme = !this.isDarkTheme;
+
+  if (this.isDarkTheme) {
+    document.body.classList.add('dark-theme');
+  } else {
+    document.body.classList.remove('dark-theme');
+  }
+}
+
   ngOnInit(): void {
     this.startNewText();
 

@@ -7,4 +7,8 @@ import { TrainerComponent } from './trainer/trainer.component';
   imports: [TrainerComponent], 
   templateUrl: './app.html'
 })
-export class AppComponent {}
+export class AppComponent {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
+}

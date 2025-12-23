@@ -2,15 +2,17 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 24px;
+  overflow: visible;
 }
 
 .text-line {
-  font-size: 26px;
+  font-size: 29px;
   font-family: monospace;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.5; 
 }
 
 .text-line span {
@@ -34,6 +36,18 @@
 .stats {
   display: flex;
   justify-content: space-between;
-  margin-top: 12px;
+  margin-top: 15px;
   font-weight: 500;
 }
+
+
+.theme-button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+

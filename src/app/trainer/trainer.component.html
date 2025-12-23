@@ -1,7 +1,9 @@
 <mat-card class="trainer-card">
   
   <ng-container *ngIf="!finished; else result">
-
+    <button class="theme-button" (click)="toggleTheme()">
+      {{ isDarkTheme ? 'Светлая тема' : 'Темная тема' }}
+    </button>
     <div class="text-line">
       <span
         *ngFor="let char of visibleChars; let i = index"
